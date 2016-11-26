@@ -1,18 +1,15 @@
 
-
-
 public class Fruit extends SquirelFood {
 
-    private int eatWithinDays;
+	private int eatWithinDays;
 
+	public Fruit(int carb, int fat, int eatWithinDays) {
+		super(carb, fat);
+		this.eatWithinDays = eatWithinDays;
+	}
 
-    public Fruit(int carb, int fat, int eatWithinDays) {
-        super(carb, fat);
-        this.eatWithinDays = eatWithinDays;
-    }
-
-    @Override
-    public String toString() {
-        return super.toString() + ", eat within " + eatWithinDays + " days";
-    }
+	@Override
+	public String toString() {
+		return super.toString() + ", eat within " + eatWithinDays + " days";
+	}
 }

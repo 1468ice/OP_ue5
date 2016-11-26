@@ -1,31 +1,30 @@
 
-
-
 public abstract class SquirelFood implements Before<SquirelFood> {
 
-    public int carb;
-    public int fat;
+	public int carb;
+	public int fat;
 
-    public SquirelFood(int carb, int fat) {
-        this.carb = carb;
-        this.fat = fat;
-    }
+	public SquirelFood(int carb, int fat) {
+		this.carb = carb;
+		this.fat = fat;
+	}
 
-    @Override
-    public String toString() {
-        return "carb: " + this.carb + "%, fat: " + this.fat + "%";
-    }
+	@Override
+	public String toString() {
+		return "carb: " + this.carb + "%, fat: " + this.fat + "%";
+	}
 
-    private boolean equals(SquirelFood that) {
-        return (this.fat == that.fat && this.carb == that.carb);
-    }
+	private boolean equals(SquirelFood that) {
+		return (this.fat == that.fat && this.carb == that.carb);
+	}
 
-    @Override
-    public boolean before(SquirelFood s) {
-        if (this.equals(s)) {
-            return false;
-        }
-        return (this.carb >= s.carb * 1.2 || this.fat >= s.fat * 1.2);
-    }
+	@Override
+	public boolean before(SquirelFood s) {
+		if (this.equals(s)) {
+
+			return false;
+		}
+
+		return (this.carb >= s.carb * 1.2 || this.fat >= s.fat * 1.2);
+	}
 }
-

@@ -2,18 +2,106 @@ import java.util.Iterator;
 
 
 public class Sorted implements java.lang.Iterable<Before> {
+	
+	public static void main(String[] args) {
+		Sorted s = new Sorted();
+		s.add(new Fruit(1, 3, 3));
+		s.add(new Fruit(2, 3, 3));
+		s.add(new Fruit(6, 3, 3));
+		s.add(new Fruit(3, 3, 3));
+		s.add(new Fruit(5, 3, 3));
+		s.add(new Fruit(4, 3, 3));
+		s.add(new Fruit(0, 0, 3));
+		
+		System.out.println(s);
+		System.out.println("Size: "+s.size());
+		System.out.println();
+		System.out.println("Iterator:");
+		
+		Iterator i1 = s.iterator();
+		while(i1.hasNext())
+			System.out.println(i1.next());
+		
+		System.out.println();
+		System.out.println("Testing remove():");
+		Iterator i2 = s.iterator();
+		i2.next();
+		i2.next();
+		i2.remove();
+		System.out.println(s);
+		
+		System.out.println("Element 4 wurde geschloescht");
+		System.out.println();
+		
+		System.out.println("Alle loeschen:");
+		
+		Iterator i3 = s.iterator();
+		while(i3.hasNext())
+			i3.remove();
+		
+		System.out.println("Size: "+s.size());
+		
+	}
+	
+	private Node head;
+	
+    class Node {
+    	
+        Before elem;
+        Node next;
+        Node prev;
 
-    Node head;
-
-    @Override
-    public String toString() {
-        String s = "";
-        s += head.elem.toString();
-        Iterator it = iterator();
-        while (it.hasNext()) {
-            s += it.next().toString();
+        public Node(Before elem, Node prev, Node next) {
+            this.elem = elem;
+            this.prev = prev;
+            this.next = next;
         }
-        return s;
+        
+    }
+
+    public void add(Before elem) {
+    	if(head == null)
+    		head = new Node(elem, null, null);
+    	else {
+    	
+    		if(elem.before(head.elem)) {
+    			Node tmp = head;
+    			head = new Node(elem, null, head);
+    			tmp.prev = head;
+    		} else {
+    			
+        		Node node = head;
+        		Node prev = null;
+        		
+        		while(node != null) {
+        			
+        			if(elem.before(node.elem)) {
+        				Node neuesElement = new Node(elem, prev, node);
+        				prev.next = neuesElement;
+        				node.prev = neuesElement;
+        				break;
+        			}
+        			
+        			prev = node;
+        			node = node.next;
+        			
+        		}
+        		
+        		if(node == null)
+        			prev.next = new Node(elem, prev, null);
+  
+    		}
+    	}
+    }
+    
+    public int size() {
+    	Node n = head;
+    	int size = 0;
+		while(n != null) {
+			size++;
+			n = n.next;
+		}
+		return size;
     }
 
     @Override
@@ -23,64 +111,45 @@ public class Sorted implements java.lang.Iterable<Before> {
 
             @Override
             public void remove() {
-                index.prev.next = index.next;
-                //PREV
+             
+               if(index == head) {
+            	   head = index.next;
+            	   if (head != null)
+            		   head.prev = null;
+               } else {
+            	  
+            	   Node prev = index.prev;
+                   Node next = index.next;
+            	   
+                   prev.next = next;
+                   next.prev = prev;
+               }
+       
+               index = index.next;
+               
             }
 
             @Override
             public Before next() {
-                return index.next.elem;
+            	Before ret = index.elem;
+            	index = index.next;
+                return ret;
             }
 
             @Override
             public boolean hasNext() {
-                return (index.next != null);
+                return index != null;
             }
         };
     }
 
-    public void add(Before elem) {
-        if (this.head == null) {
-            head = new Node(elem, null);
-        } else {
-            Node node = head;
-            Node prev = null;
-            boolean added = false;
-            while(node.next != null && !added) {                       //SET PREV!!!
-                if (elem.before(node.elem)) {
-                    Node element = new Node(elem, node);
-                    prev.next = element;
-                    element.prev = prev;
-                    added = true;
-                }
-                prev = node;
-                node = node.next;
-            }
-            if (!added) {
-                Node last = new Node(elem, null);
-                node.next = last;
-                last.prev = node;
-            }
-        }
-
-
+    @Override
+    public String toString() {
+    	String ret = "";
+        Iterator i = iterator();
+        while(i.hasNext())
+        	ret += i.next() + (i.hasNext()? "\n" : "");
+        return ret;
     }
-
-    class Node {
-
-        public Node(Before elem, Node next) {
-            this.elem = elem;
-            this.next = next;
-            if (next != null) {
-                next.prev = this;
-            }
-        }
-
-        Before elem;
-        Node next;
-        Node prev;
-
-    }
-
 
 }
