@@ -46,7 +46,7 @@ public class Sorted implements java.lang.Iterable<Before> {
             Node node = head;
             Node prev = null;
             boolean added = false;
-            while(node != null) {                       //SET PREV!!!
+            while(node.next != null && !added) {                       //SET PREV!!!
                 if (elem.before(node.elem)) {
                     Node element = new Node(elem, node);
                     prev.next = element;
@@ -55,9 +55,11 @@ public class Sorted implements java.lang.Iterable<Before> {
                 }
                 prev = node;
                 node = node.next;
-                if (node.next == null) {
-                    node.next = new Node(elem, null);
-                }
+            }
+            if (!added) {
+                Node last = new Node(elem, null);
+                node.next = last;
+                last.prev = node;
             }
         }
 
@@ -69,7 +71,9 @@ public class Sorted implements java.lang.Iterable<Before> {
         public Node(Before elem, Node next) {
             this.elem = elem;
             this.next = next;
-            //next.prev = this;
+            if (next != null) {
+                next.prev = this;
+            }
         }
 
         Before elem;
