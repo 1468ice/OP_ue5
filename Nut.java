@@ -13,8 +13,4 @@ public class Nut extends SquirelFood {
 		return super.toString() + ", peel: " + this.peel;
 	}
 
-	@Override
-	public boolean before(SquirelFood s) {
-		return super.before(s);
-	}
 }
