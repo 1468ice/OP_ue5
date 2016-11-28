@@ -1,60 +1,61 @@
 import java.util.Iterator;
 
 
-public class Sorted<B extends Before> implements Iterable {
+public class ClusteredCollection implements Iterable {
 	
 
 	private Node head;
 	
-class Node {
-    	
-        Before elem;
-        Node next;
-        Node prev;
-        
-
-        public Node(Before elem, Node prev, Node next) {
-            this.elem = elem;
-            this.prev = prev;
-            this.next = next;
-        }
-        
-
-}
-
-    public void add(Before elem) {
+	class Node {
+		
+		Object o;
+		Node next;
+		Node prev;
+		
+		public Node(Object o, Node next, Node prev) {
+			this.o = o;
+			this.next = next;
+			this.prev = prev;
+		}
+		
+		
+	}
+	
+	public ClusteredCollection(Object[] o) {
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+    public void add(Object elem) {
     	if(head == null)
     		head = new Node(elem, null, null);
     	else {
     	
-    		if(elem.before(head.elem)) {
-    			Node tmp = head;
-    			head = new Node(elem, null, head);
-    			tmp.prev = head;
-    		} else {
-    			
         		Node node = head;
         		Node prev = null;
         		
-        		while(node != null) {
+        		while(node.next != null) {
         			
-        			if(elem.before(node.elem)) {
-        				Node neuesElement = new Node(elem, prev, node);
-        				prev.next = neuesElement;
-        				node.prev = neuesElement;
-        				break;
-        			}
-        			
+       
         			prev = node;
         			node = node.next;
         			
         		}
         		
-        		if(node == null)
-        			prev.next = new Node(elem, prev, null);
+        		Node neuesElement = new Node(elem, prev, null);
+				prev.next = neuesElement;
+				node.prev = neuesElement;
+				
+        		
+        		
   
     		}
-    	}
+    	
     }
     
     public int size() {
@@ -69,7 +70,7 @@ class Node {
 
     @Override
     public Iterator iterator() {
-        return new Iterator<Before>() {
+        return new Iterator<Object>() {
             Node index = head;
 
             @Override
@@ -94,9 +95,8 @@ class Node {
 
             @Override
             public Before next() {
-            	Before ret = index.elem;
             	index = index.next;
-                return ret;
+                return null;
             }
 
             @Override
