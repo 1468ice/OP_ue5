@@ -1,50 +1,76 @@
 import java.util.Iterator;
 
-public class Clustered<A extends ClusteredCollection, B extends Before> extends Sorted<B> {
+public class Clustered<A, B extends Before> extends Sorted<B> {
 	
-class Node {
-    	
-        Before elem;
-        Node next;
-        Node prev;
-        ClusteredCollection c;
-        
+ 
 
-        public Node(Before elem, Node prev, Node next, ClusteredCollection c) {
-            this.elem = elem;
-            this.prev = prev;
-            this.next = next;
-            this.c = c;
-        }
-}
-
-	Node head; 
+	ClusterNode head; 
 	
 	@Override
 	public Iterator iterator() {
-		return super.iterator();
+		return new Iterator<Before>() {
+            ClusterNode index = head;
+
+            @Override
+            public void remove() {
+             
+               if(index == head) {
+            	   head = index.next;
+            	   if (head != null)
+            		   head.prev = null;
+               } else {
+            	  
+            	   ClusterNode prev = index.prev;
+                   ClusterNode next = index.next;
+            	   
+                   prev.next = next;
+                   next.prev = prev;
+               }
+       
+               index = index.next;
+               
+            }
+
+            @Override
+            public Before next() {
+            	Before ret = index.elem;
+            	index = index.next;
+                return ret;
+            }
+            
+            public ClusterNode nextClusterNode() {
+            	ClusterNode ret = index;
+            	index = index.next;
+                return ret;
+            }
+
+            @Override
+            public boolean hasNext() {
+                return index != null;
+            }
+	};
 	}
 
 
 	public Iterator iterator(final Object o) {
 		return new Iterator() {
 			
-			Node index = head;
+			ClusterNode index = head;
 			ClusteredCollection liste = new ClusteredCollection();
-			Iterator i = liste.iterator();
+			Iterator i = null;
 			
 			{
 				
 				while(index != null) {
 					for(Object object: index.c) {
-						if(object.equals(o)) {
+						if( o == null || object.equals(o)) {
 							liste.add(index);
 						}
 					}
 					index = index.next;
 				}
 				
-				
+				 i = liste.iterator();
 			}
 			
 			@Override
@@ -53,45 +79,49 @@ class Node {
 			}
 
 			@Override
-			public Node next() {
-				return (Node)i.next();
+			public ClusterNode next() {
+				return (ClusterNode)i.next();
+			}
+			
+			public Object nextObject() {
+				return ((ClusterNode)i.next()).elem;
 			}
 
 
 			};
 	}
 
-	public void add(Object[] objects, B elem) {
+	public void add(A[] objects, B elem) {
 		ClusteredCollection c = new ClusteredCollection(objects);
 	    	if(head == null)
-	    		head = new Node(elem, null, null, c);
+	    		head = new ClusterNode(elem, null, null, c);
 	    	else {
 	    	
 	    		if(elem.before(head.elem)) {
-	    			Node tmp = head;
-	    			head = new Node(elem, null, head, c);
+	    			ClusterNode tmp = head;
+	    			head = new ClusterNode(elem, null, head, c);
 	    			tmp.prev = head;
 	    		} else {
 	    			
-	        		Node node = head;
-	        		Node prev = null;
+	        		ClusterNode ClusterNode = head;
+	        		ClusterNode prev = null;
 	        		
-	        		while(node != null) {
+	        		while(ClusterNode != null) {
 	        			
-	        			if(elem.before(node.elem)) {
-	        				Node neuesElement = new Node(elem, prev, node, c);
+	        			if(elem.before(ClusterNode.elem)) {
+	        				ClusterNode neuesElement = new ClusterNode(elem, prev, ClusterNode, c);
 	        				prev.next = neuesElement;
-	        				node.prev = neuesElement;
+	        				ClusterNode.prev = neuesElement;
 	        				break;
 	        			}
 	        			
-	        			prev = node;
-	        			node = node.next;
+	        			prev = ClusterNode;
+	        			ClusterNode = ClusterNode.next;
 	        			
 	        		}
 	        		
-	        		if(node == null)
-	        			prev.next = new Node(elem, prev, null, c);
+	        		if(ClusterNode == null)
+	        			prev.next = new ClusterNode(elem, prev, null, c);
 	  
 	    		}
 	    	}
