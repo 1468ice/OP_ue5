@@ -1,6 +1,6 @@
 import java.util.Iterator;
 
-public class Clustered<Collection, B extends Before> extends Sorted<B> {
+public class Clustered<A extends ClusteredCollection, B extends Before> extends Sorted<B> {
 	
 class Node {
     	
@@ -29,47 +29,36 @@ class Node {
 	public Iterator iterator(final Object o) {
 		return new Iterator() {
 			
-			Node index;
+			Node index = head;
+			ClusteredCollection liste = new ClusteredCollection();
+			Iterator i = liste.iterator();
 			
+			{
+				
+				while(index != null) {
+					for(Object object: index.c) {
+						if(object.equals(o)) {
+							liste.add(index);
+						}
+					}
+					index = index.next;
+				}
+				
+				
+			}
 			
 			@Override
 			public boolean hasNext() {
-				return (next()!= null);
+				return i.hasNext();
 			}
 
 			@Override
 			public Node next() {
-				while (index.next != null) {
-					index = index.next;
-					Iterator i = index.c.iterator();
-					while(i.hasNext()) {
-						if(i.next().equals(o)) {
-							return index;
-						}
-					}
-				}
-				return null;
+				return (Node)i.next();
 			}
 
 
-			@Override
-			public void remove() {
-				if(index == head) {
-					head = index.next;
-					if (head != null)
-						head.prev = null;
-				} else {
-
-					Node prev = index.prev;
-					Node next = index.next;
-
-					prev.next = next;
-					next.prev = prev;
-				}
-
-				index = index.next;
-			}
-		};
+			};
 	}
 
 	public void add(Object[] objects, B elem) {
@@ -107,6 +96,8 @@ class Node {
 	    		}
 	    	}
 	  	}
+	
+	
 
 
 }
