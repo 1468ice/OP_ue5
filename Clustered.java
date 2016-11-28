@@ -16,8 +16,6 @@ class Node {
             this.next = next;
             this.c = c;
         }
-        
-
 }
 
 	Node head; 
@@ -27,11 +25,8 @@ class Node {
 		return super.iterator();
 	}
 
-	public Iterator iterator(Object o) {
-		
-		
-		
-		
+
+	public Iterator iterator(final Object o) {
 		return new Iterator() {
 			
 			Node index;
@@ -39,36 +34,40 @@ class Node {
 			
 			@Override
 			public boolean hasNext() {
-				return index != null;
+				return (next()!= null);
 			}
 
 			@Override
-			public Object next() {
-				
-				Iterator i = index.c.iterator();				
-				
-				while(i.hasNext()) {
-					
-					if(i.next().equals(o)) {
-						index = index.next;
-						return i.next();
+			public Node next() {
+				while (index.next != null) {
+					index = index.next;
+					Iterator i = index.c.iterator();
+					while(i.hasNext()) {
+						if(i.next().equals(o)) {
+							return index;
+						}
 					}
-					
-					
-					
 				}
-				
-				
-				
-				
-				
-				
 				return null;
 			}
 
+			
 			@Override
 			public void remove() {
+				if(index == head) {
+					head = index.next;
+					if (head != null)
+						head.prev = null;
+				} else {
 
+					Node prev = index.prev;
+					Node next = index.next;
+
+					prev.next = next;
+					next.prev = prev;
+				}
+
+				index = index.next;
 			}
 		};
 	}
