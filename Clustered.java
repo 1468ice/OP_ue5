@@ -51,7 +51,7 @@ class Node {
 				return null;
 			}
 
-			
+
 			@Override
 			public void remove() {
 				if(index == head) {
