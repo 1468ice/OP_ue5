@@ -4,8 +4,10 @@ public class ClusteredCollection implements Iterable {
 
 	private Node head;
 
+	//inner Class
 	class Node {
 
+		//assert o != null
 		Object o;
 		Node next;
 
@@ -25,6 +27,7 @@ public class ClusteredCollection implements Iterable {
 			add(o);
 	}
 
+	//adds element, not sorted
 	public void add(Object elem) {
 		if (head == null)
 			head = new Node(elem, null);

@@ -1,5 +1,6 @@
-public class ClusterNode {
+public class ClusterNode {		//Nodes for class Clustered
 
+	//assert elem != null
 	Before elem;
 	ClusterNode next;
 	ClusterNode prev;

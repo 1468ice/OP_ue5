@@ -1,8 +1,9 @@
 
 public class Nut extends SquirelFood {
 
-	private char peel; // char A-G
+	private char peel; //assert char A-G
 
+	//assert carb and fat >= 0
 	public Nut(int carb, int fat, char peelAtoG) {
 		super(carb, fat);
 		this.peel = peelAtoG;

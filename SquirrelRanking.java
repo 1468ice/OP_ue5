@@ -1,6 +1,7 @@
 
 public class SquirrelRanking implements Before<SquirrelRanking> {
 
+	//a Ranking should be >= 0
 	private float f;
 
 	public SquirrelRanking(float f) {
@@ -13,6 +14,7 @@ public class SquirrelRanking implements Before<SquirrelRanking> {
 	}
 
 	@Override
+	//assert s != null
 	public boolean before(SquirrelRanking s) {
 		return (this.f >= 2 * s.f);
 

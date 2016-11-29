@@ -4,6 +4,7 @@ public class Sorted<B extends Before> implements Iterable {
 
 	private Node head;
 
+	//inner class; used for listing
 	class Node {
 
 		Before elem;
@@ -18,11 +19,13 @@ public class Sorted<B extends Before> implements Iterable {
 
 	}
 
+	//adds Before element into list in a sorted manner;
+	//assert elem != null
 	public void add(Before elem) {
+		//empty list
 		if (head == null)
 			head = new Node(elem, null, null);
 		else {
-
 			if (elem.before(head.elem)) {
 				Node tmp = head;
 				head = new Node(elem, null, head);

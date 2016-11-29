@@ -7,6 +7,8 @@ public class Clustered<A, B extends Before> extends Sorted<B> {
 	@Override
 	public Iterator iterator() {
 		return new Iterator<Before>() {
+
+			//Index in Node List
 			ClusterNode index = head;
 
 			@Override

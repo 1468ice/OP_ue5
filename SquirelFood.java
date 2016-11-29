@@ -1,6 +1,7 @@
 
 public abstract class SquirelFood implements Before<SquirelFood> {
 
+	//assert carb and fat >= 0
 	private int carb;
 	private int fat;
 
@@ -14,11 +15,13 @@ public abstract class SquirelFood implements Before<SquirelFood> {
 		return "carb: " + this.carb + "%, fat: " + this.fat + "%";
 	}
 
+	//assert that != null
 	private boolean equals(SquirelFood that) {
 		return (this.fat == that.fat && this.carb == that.carb);
 	}
 
 	@Override
+	//assert s != null
 	public boolean before(SquirelFood s) {
 		if (this.equals(s)) {
 
