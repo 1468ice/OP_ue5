@@ -3,50 +3,57 @@ import java.util.Iterator;
 public class Test {
 
 	public static void main(String[] args) {
-//		Sorted s = new Sorted();
-//		s.add(new Fruit(1, 3, 3));
-//		s.add(new Fruit(2, 3, 3));
-//		s.add(new Fruit(6, 3, 3));
-//		s.add(new Fruit(3, 3, 3));
-//		s.add(new Fruit(5, 3, 3));
-//		s.add(new Fruit(4, 3, 3));
-//		s.add(new Fruit(0, 0, 3));
-//		
-//		System.out.println(s);
-//		System.out.println("Size: "+s.size());
-//		System.out.println();
-//		System.out.println("Iterator:");
-//		
-//		Iterator i1 = s.iterator();
-//		while(i1.hasNext())
-//			System.out.println(i1.next());
-//		
-//		System.out.println();
-//		System.out.println("Testing remove():");
-//		Iterator i2 = s.iterator();
-//		i2.next();
-//		i2.next();
-//		i2.remove();
-//		System.out.println(s);
-//		
-//		System.out.println("Element 4 wurde geschloescht");
-//		System.out.println();
-//		
-//		System.out.println("Alle loeschen:");
-//		
-//		Iterator i3 = s.iterator();
-//		while(i3.hasNext())
-//			i3.remove();
-//		
-//		System.out.println("Size: "+s.size());
-//		
+		System.out.println("##########################################");
+		System.out.println("TESTING SORTED & ITERATOR");
+		System.out.println("##########################################");
+		Sorted s = new Sorted();
+		s.add(new Fruit(1, 3, 3));
+		s.add(new Fruit(2, 3, 3));
+		s.add(new Fruit(6, 3, 3));
+		s.add(new Fruit(3, 3, 3));
+		s.add(new Fruit(5, 3, 3));
+		s.add(new Fruit(4, 3, 3));
+		s.add(new Fruit(0, 0, 3));
+		
+		System.out.println(s);
+		System.out.println("Size: "+s.size());
+		System.out.println();
+		System.out.println("Iterator:");
+		
+		Iterator it1 = s.iterator();
+		while(it1.hasNext())
+			System.out.println(it1.next());
+		
+		System.out.println();
+		System.out.println("Testing remove():");
+		Iterator it2 = s.iterator();
+		it2.next();
+		it2.next();
+		it2.remove();
+		System.out.println(s);
+		
+		System.out.println("Element 4 wurde geschloescht");
+		System.out.println();
+		
+		System.out.println("Alle loeschen:");
+		
+		Iterator it3 = s.iterator();
+		while(it3.hasNext())
+			it3.remove();
+		
+		System.out.println("Size: "+s.size());
+		
+		System.out.println("##########################################");
+		System.out.println("TESTING CLUSTERED");
+		System.out.println("##########################################");
+		
 		Clustered<String, Nut> c = new Clustered<>();
 		
-		String[] s = new String[] { "Nut1", "Typ2", "Nut3"};
+		String[] s1 = new String[] { "Nut1", "Typ2", "Nut3"};
 		String[] s2 = new String[] { "Typ1", "Typ2", "Typ3"};
 		String[] s3 = new String[] { "1", "2", "3"};
 		
-		c.add(s,new Nut(3, 3, 'A'));
+		c.add(s1,new Nut(3, 3, 'A'));
 		c.add(s2,new Nut(5, 5, 'C'));
 		c.add(s3,new Nut(5, 1, 'F'));
 		
@@ -60,10 +67,12 @@ public class Test {
 		while(i2.hasNext())
 			System.out.println(i2.next());
 		
+		System.out.println("Alle gesuchten Typ2 Elemente wurden ausgegeben.");
 		System.out.println();
 		
 		
 		
+		System.out.println("TESTING SQUIRREL RANKING:");
 		Sorted<Nut> nuts = new Sorted<>();
 		
 		nuts.add(new Nut(3,3,'A'));
@@ -90,7 +99,7 @@ public class Test {
 	
 		Clustered<String, Fruit> clu = new Clustered<>();
 		
-		clu.add(s, new Fruit(6, 6, 6));
+		clu.add(s1, new Fruit(6, 6, 6));
 		clu.add(s2, new Fruit(7, 7, 7));
 		clu.add(s3, new Fruit(8, 8, 8));
 						
@@ -98,7 +107,8 @@ public class Test {
 		while(i5.hasNext())
 			System.out.println(i5.next());
 		
-		System.out.println("#################################3333");
+		System.out.println("##########################################");
+		System.out.println("TESTING Clustered<String, SquirelFood>");
 		
 		Clustered<String, SquirelFood> cluster= new Clustered<>();
 		Iterator i6 = c.iterator(null);
@@ -146,12 +156,13 @@ public class Test {
 	
 		
 		System.out.println();
+		System.out.println("TESTING CLUSTERED TO SORTED");
 
 		Iterator clusterIt2 = cluster.iterator("Typ2");
 		while (clusterIt2.hasNext()) 
 			System.out.println(clusterIt2.next());
-	
-		System.out.println("ETEASD");
+
+		System.out.println();
 		
 		Sorted clusterToSort = cluster;
 		System.out.println(clusterToSort);

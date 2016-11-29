@@ -1,8 +1,8 @@
 
 public abstract class SquirelFood implements Before<SquirelFood> {
 
-	public int carb;
-	public int fat;
+	private int carb;
+	private int fat;
 
 	public SquirelFood(int carb, int fat) {
 		this.carb = carb;
