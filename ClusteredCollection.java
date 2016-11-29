@@ -1,14 +1,6 @@
 import java.util.Iterator;
 
 public class ClusteredCollection implements Iterable {
-	
-	
-	public static void main(String[] args) {
-		ClusteredCollection c = new ClusteredCollection(new Object[] {"hallo", "test", "hi", new Integer(1)});
-		Iterator i = c.iterator();
-		while(i.hasNext())
-			System.out.println(i.next());
-	}
 
 	private Node head;
 
@@ -23,9 +15,9 @@ public class ClusteredCollection implements Iterable {
 		}
 
 	}
-	
+
 	public ClusteredCollection() {
-		
+
 	}
 
 	public ClusteredCollection(Object[] objects) {
@@ -41,7 +33,7 @@ public class ClusteredCollection implements Iterable {
 			Node node = head;
 			while (node.next != null)
 				node = node.next;
-			
+
 			node.next = new Node(elem, null);
 		}
 	}

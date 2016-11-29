@@ -1,7 +1,7 @@
 
 public class SquirrelRanking implements Before<SquirrelRanking> {
 
-	float f;
+	private float f;
 
 	public SquirrelRanking(float f) {
 		this.f = f;
