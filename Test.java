@@ -7,6 +7,7 @@ public class Test {
 	Isabel, Monika, Samuel: Klassen Clustered und ClusteredCollection komplett, Testfaelle
 	Isabel: Squirrelfood und Squirrelranking - Konstruktoren und toString()
 	Monika: Zusicherungen
+	Samuel: Sorted, Iteratoren
 */
 	public static void main(String[] args) {
 		System.out.println("##########################################");
