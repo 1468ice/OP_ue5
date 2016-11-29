@@ -82,6 +82,10 @@ public class Clustered<A, B extends Before> extends Sorted<B> {
 				return (ClusterNode) i.next();
 			}
 
+			@Override
+			public void remove() {
+
+			}
 		};
 	}
 

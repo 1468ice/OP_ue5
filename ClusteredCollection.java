@@ -67,7 +67,11 @@ public class ClusteredCollection implements Iterable {
 			public boolean hasNext() {
 				return index != null;
 			}
-		};
+
+            @Override
+            public void remove() {
+            }
+        };
 	}
 
 	@Override
