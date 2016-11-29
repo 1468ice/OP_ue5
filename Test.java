@@ -5,8 +5,9 @@ public class Test {
 	/*Arbeitsaufteilung Aufgabe 5
 
 	Isabel, Samuel: Grundgeruest - alle Klassen angelegt, Typbeziehungen Schnittstellen
-	Isabel: Squirrelfood und Squirrelranking - Konstruktoren und toString()
 	Isabel, Monika, Samuel: Klassen Clustered und ClusteredCollection komplett, Testfaelle
+	Isabel: Squirrelfood und Squirrelranking - Konstruktoren und toString()
+
 
 
 */
