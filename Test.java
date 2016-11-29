@@ -1,7 +1,15 @@
 import java.util.Iterator;
 
 public class Test {
+	
+	/*Arbeitsaufteilung Aufgabe 5
 
+	Isabel, Samuel: Grundgeruest - alle Klassen angelegt, Typbeziehungen Schnittstellen
+	Isabel: Squirrelfood und Squirrelranking - Konstruktoren und toString()
+	Isabel, Monika, Samuel: Klassen Clustered und ClusteredCollection komplett, Testfaelle
+
+
+*/
 	public static void main(String[] args) {
 		System.out.println("##########################################");
 		System.out.println("TESTING SORTED & ITERATOR");
